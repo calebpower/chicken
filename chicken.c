@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "stack.h"
 
 int main(int argc, char** argv) {
   if(argc != 2) {
@@ -19,6 +20,24 @@ int main(int argc, char** argv) {
     printf("%c", ch);
 
   fclose(file);
+
+  struct Stack *p = newStack(5);
+
+  push(p, 1);
+  push(p, 2);
+  push(p, 3);
+
+  printf("Top element is %d\n", peek(p));
+  printf("Stack size is %d\n", size(p));
+
+  pop(p);
+  pop(p);
+  pop(p);
+
+  if (isEmpty(p))
+    printf("Stack is empty");
+  else
+    printf("Stack is not empty");
 
   return 0;
 }
