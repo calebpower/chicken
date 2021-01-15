@@ -15,13 +15,13 @@ int main(int argc, char** argv) {
     return 2;
   }
 
+  struct Stack *p = newStack(1024);
+
   char ch;
   while((ch = fgetc(file)) != EOF)
     printf("%c", ch);
 
   fclose(file);
-
-  struct Stack *p = newStack(5);
 
   push(p, 1);
   push(p, 2);

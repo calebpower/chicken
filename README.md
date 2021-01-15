@@ -1,2 +1,2 @@
-# chicken-interpreter
-Interpreter for the `chicken` esoteric computer language.
+# chicken
+A compiler and runtime environment for the `chicken` esoteric language.
