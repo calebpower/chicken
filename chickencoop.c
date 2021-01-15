@@ -2,17 +2,20 @@
 #include <stdlib.h>
 
 int main(int argc, char** argv) {
-  if(argc != 2) {
+  if(argc != 3) {
     printf("Bad args.\n");
     return 1;
   }
 
-  FILE *file;
-  file = fopen(argv[1], "r");
-  if(file == NULL) {
-    printf("Bad file.\n");
+  FILE *inputFile;
+  inputFile = fopen(argv[1], "r");
+  if(inputFile == NULL) {
+    printf("Bad input file.\n");
     return 2;
   }
+
+  FILE *outputFile;
+  outputFile = fopen(argv[2], "w");
 
   char chicken[] = "chicken";
 
@@ -22,7 +25,7 @@ int main(int argc, char** argv) {
   int idx = 0;
   char ch;
 
-  while((ch = fgetc(file)) != EOF) {
+  while((ch = fgetc(inputFile)) != EOF) {
     printf("%c", ch);
 
     if(col == 1 && ch == '\n') { // first column, if it's a newline
@@ -38,6 +41,7 @@ int main(int argc, char** argv) {
       } else if(ch == '\n' && idx == 0) { // if we run into a newline and we aren't in the middle of a chicken
         printf("--- %d\n", (int)count); // make sure to make known the number of chickens in the line
         idx = 0; // and reset the mod index for the next line
+        fputc((int)count, outputFile);
         count = '\0'; // and reset the count for the next line
         line++; // and up the line
         col = 1; // and reset the column count
@@ -52,7 +56,7 @@ int main(int argc, char** argv) {
   }
 
 
-  fclose(file);
+  fclose(inputFile);
 
   return 0;
 }
